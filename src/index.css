@@ -1,0 +1,143 @@
+/* Reset some default browser styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* 
+we need to set box-sizing to border-box because it changes the way the width and height of elements are calculated.
+  */
+}
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #149432, #0bd2dd);
+
+}
+
+.calculator-main {
+text-align: center;
+  /* 
+  text-align: center; centers the text inside the calculator-main container.
+  */
+  padding: 2rem;
+  /* 
+  padding: 2rem; adds space around the content inside the calculator-main container.
+  */
+  color: white;
+  /* 
+  color: white; sets the text color to white for better contrast against the background.
+  */
+  font-size: 1.2rem;
+}
+
+.calculator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  padding: 1rem;
+
+ 
+
+}
+
+.calculator-grid {
+  display: grid;
+  margin-top: 2rem;
+  grid-template-columns: repeat(4, 7rem);
+  grid-template-rows: minmax(7rem, auto) repeat(6, 6rem);
+  gap: 0.5rem;
+
+  border: 3px solid rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #0bd2dd 60%, #149432 100%);
+  border-radius: 25px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25), 0 1.5px 0 #fff inset, 0 3px -4px 8px #b0b0b0 inset;
+  padding: 1.5rem;
+
+}
+
+.span-two {
+  /* 
+  it expands the element to span two columns in the grid.
+  for AC and = buttons
+  */
+  grid-column: span 2;
+}
+
+.calculator-output {
+  grid-column: 1 / -1;
+  /* 
+  it expands the element to span all columns in the grid.
+  for the output display
+  */
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 1rem;
+  word-wrap: break-word;
+  /* 
+  word-wrap: break-word; allows long words to be broken and wrap onto the next line.
+  This is useful for displaying long numbers or expressions without overflowing the container.
+  */
+
+  word-break: break-all;
+  /* 
+  word-break: break-all; allows long words to be broken at any character to prevent overflow.
+  overflow means that if the content is too long to fit in the container, it will be cut off.
+  This is useful for displaying long numbers or expressions without overflowing the container.
+  */
+
+  border-radius: 15px;
+
+}
+
+.calculator-output .previous-operand {
+  color: white;
+  font-size: 1.5rem;
+
+}
+
+.calculator-output .current-operand {
+  color: white;
+  font-size: 2.5rem;
+
+}
+
+.calculator-grid>button {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
+  cursor: pointer;
+  outline: none;
+  box-shadow:0 4px 12px rgba(0, 0, 0, 0.18), 0 1.5px 0 #fff inset,03px -4px 8px #b0b0b0 inset;
+  border-radius: 15px;
+  
+
+  
+  /*
+  
+outline: none; removes the default focus outline that appears when a button is clicked.
+ */
+}
+
+/* 
+Make the buttons a bit more interactive by changing their appearance on hover and focus once clicked.
+
+ */
+.calculator-grid>button:hover,
+.calculator-grid>button:focus {
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.calculator-grid>button:active {
+  background-color: rgba(6, 63, 161, 0.6);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
