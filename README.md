@@ -42,11 +42,11 @@ Follow these steps to install and run React-Calculator-KP locally:
 
 ## Screenshots
 
-![Screenshot1](./assets/s1.JPG)
+![Screenshot1](./assets/s1.jpg)
 
-![Screenshot2](./assets/s2.JPG)
+![Screenshot2](./assets/s2.jpg)
 
-![Screenshot3](./assets/s3.JPG)
+![Screenshot3](./assets/s3.jpg)
 
 
 
