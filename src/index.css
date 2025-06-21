@@ -14,6 +14,9 @@ body {
   margin: 0;
   font-family: 'Arial', sans-serif;
   background: linear-gradient(135deg, #149432, #0bd2dd);
+  
+
+
 
 }
 
@@ -22,7 +25,7 @@ text-align: center;
   /* 
   text-align: center; centers the text inside the calculator-main container.
   */
-  padding: 2rem;
+  padding: 1.25rem;
   /* 
   padding: 2rem; adds space around the content inside the calculator-main container.
   */
@@ -31,9 +34,32 @@ text-align: center;
   color: white; sets the text color to white for better contrast against the background.
   */
   font-size: 1.2rem;
+  /*
+  font-size: 1.2rem; sets the font size of the text inside the calculator-main container.
+  */
+  background-color: rgba(0, 0, 0, 0.5);
+
+  ;
+
+  height: 100vh; 
+  /* vh means viewport height, so 100vh means the height of the viewport.
+  This ensures that the calculator takes up the full height of the viewport, making it more visually appealing and easier to use on different screen sizes. */
 }
 
+.calculator-main h1 {
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
 
+/* Prevent calculator from overflowing the viewport */
+.calculator-main {
+  max-width: 100vw;
+  overflow-x: auto;
+}
+
+/* Prevent output from overflowing its container */
+.calculator-output {
+  overflow-x: auto;
+}
 
 
 
@@ -50,15 +76,15 @@ text-align: center;
 
 .calculator-grid {
   display: grid;
-  margin-top: 1rem;
-  grid-template-columns: repeat(4, 7rem);
-  grid-template-rows: minmax(7rem, auto) repeat(6, 6rem);
-  gap: 0.5rem;
+  grid-template-columns: repeat(4, 5.5rem);
+  grid-template-rows: minmax(7rem, auto) repeat(6, 4.5rem);
+  gap: 0.3rem;
   border: 3px solid rgba(0, 0, 0, 0.15);
   background: linear-gradient(135deg, #0bd2dd 60%, #149432 100%);
   border-radius: 25px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25), 0 1.5px 0 #fff inset, 0 3px -4px 8px #b0b0b0 inset;
   padding: 1.5rem;
+ 
   
 
 }
@@ -193,18 +219,18 @@ Make the buttons a bit more interactive by changing their appearance on hover an
 
 /* start styles to <footer> */
 footer {
-  background: linear-gradient(135deg, #94bc0e, #0bd2dd, #a82f0a);
+  background: linear-gradient(135deg, #95bf09, #1b058b, #011013);
   font-weight: bold;
   width: 100%;
-  height: 70px;
-  position: sticky;
+  height: fit-content;
+  position: fixed;
   bottom: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-top: 1px solid white;
-  box-shadow: 20px -2px 10px rgba(201, 7, 7, 0.1);
-
+  border-top: 6px solid white;
+  box-shadow: 20px -2px 10px rgba(225, 241, 5, 0.7);
+  opacity: 0.6;
 
 
 }
@@ -212,7 +238,7 @@ footer {
 footer h2 {
 
   color: #111212;
-  font-size: 15px;
+  font-size: 20px;
   margin: 0;
 }
 
@@ -226,8 +252,9 @@ footer p {
 
 footer div {
 
-  line-height: 1.5;
+  line-height: 8.5;
   /* text-align: right; */
+  
 }
 
 footer a {
