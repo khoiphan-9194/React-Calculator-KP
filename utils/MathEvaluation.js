@@ -1,21 +1,22 @@
-
 import * as math from "mathjs";
 
-export default function MathEvaluation({ currentOperand, previousOperand, operation }) {
-
+export default function MathEvaluation({
+  currentOperand,
+  previousOperand,
+  operation,
+}) {
   if (currentOperand == null || previousOperand == null || operation == null) {
     return ""; // Return empty string if any operand or operation is missing
   }
 
   const current = parseFloat(currentOperand);
   const previous = parseFloat(previousOperand);
-  
 
   if (isNaN(current) || isNaN(previous)) {
     return ""; // Return empty string if either operand is not a number
   }
 
-let computation;
+  let computation;
   switch (operation) {
     case "+":
       computation = math.add(previous, current);
