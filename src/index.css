@@ -78,7 +78,7 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   display: grid;
   grid-template-columns: repeat(4, 5.5rem);
   grid-template-rows: minmax(7rem, auto) repeat(6, 4.5rem);
-  gap: 0.3rem;
+  gap: 0.5rem;
   border: 3px solid rgba(0, 0, 0, 0.15);
   background: linear-gradient(135deg, #0bd2dd 60%, #149432 100%);
   border-radius: 25px;
