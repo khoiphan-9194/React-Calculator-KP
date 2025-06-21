@@ -3,11 +3,14 @@ import { useEffect } from "react";
 export default function OpertationButton({ operation, dispatch }) {
   useEffect(() => {
     function handleKeyDown(e) {
+    
+      // Check if the pressed key matches the operation
       if (e.key === operation) {
         dispatch({ type: ACTIONS.CHOOSE_OPERATION, payload: { operation } });
       }
     }
     window.addEventListener("keydown", handleKeyDown);
+    
     return () => window.removeEventListener("keydown", handleKeyDown);
     //window.removeEventListener("keydown", handleKeyDown) is used to clean up the event listener when the component unmounts or digit changes
     // this prevents memory leaks and ensures that the event listener is only active when needed

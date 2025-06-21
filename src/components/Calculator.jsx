@@ -48,7 +48,15 @@ export default function Calculator() {
           </div>
 
           <div className="current-operand">
-            <FormatNumber operand={currentOperand} />
+          {
+            currentOperand ? (
+              <FormatNumber operand={currentOperand} />
+            ) : (
+              <span className="cal_placeholder" style={{ color: "white" }}>
+                _
+              </span>
+            )
+          }
           </div>
         </div>
 

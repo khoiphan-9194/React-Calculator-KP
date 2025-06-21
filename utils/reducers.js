@@ -20,31 +20,54 @@ export default function reducer(state, { type, payload }) {
         return state; // Ignore multiple decimal points
       }
 
-     
-
       return {
         ...state,
-        currentOperand: `${state.currentOperand  || ""}${payload.digit}`,
+        currentOperand: `${state.currentOperand || ""}${payload.digit}`,
       };
 
     case ACTIONS.CHOOSE_OPERATION:
       //operation="√"
       // Handle square root operation
-      // if (payload.operation === "√") {
-      //   // If no currentOperand, set operation to "√" and clear currentOperand to allow digit input
-      //   if (state.currentOperand == null) {
-      //     return {
-      //       ...state,
-      //       operation: payload.operation,
-      //       previousOperand:"0"
+      if (payload.operation === "√") {
+        // If currentOperand is null, we will set it to "0"
+        // and set previousOperand to null and operation to null
+        // This is to avoid errors when the user clicks on the square root button
+        // when there is no currentOperand or previousOperand
+        if (!state.currentOperand && !state.previousOperand) {
+          return {
+            ...state,
+            currentOperand: "0",
+            previousOperand: null,
+            operation: null,
+          };
+        }
 
-      //     };
-      //   }
+        // If currentOperand exists, we will calculate the square root of it
+        // and set the currentOperand to the result
+        if (state.currentOperand) {
+          return {
+            ...state,
+            currentOperand: MathEvaluation({
+              currentOperand: state.currentOperand,
+              previousOperand: "0", // Use "0" as previousOperand for square root calculation
+              operation: payload.operation,
+            }),
+            override: true, // Set override to true to allow next digit input
+          };
+        }
 
-      // }
+        // Default fallback
+        return state;
+      }
+      // Handle exponentiation operation
 
+
+    
 
       // Handle percentage operation
+      // if we have a currentOperand and the user clicks on the percentage button,
+      // we will calculate the percentage of the currentOperand
+      // and set the currentOperand to the result
       if (payload.operation === "%" && state.currentOperand != null) {
         return {
           ...state,
@@ -63,58 +86,69 @@ export default function reducer(state, { type, payload }) {
       }
 
       // Handle negation operation (±)
+      // If the operation is "±", we will do the following:
       if (payload.operation === "±") {
         // If both operands are null, set currentOperand to "0"
+        // and set previousOperand and operation to null
+        // This is to avoid errors when the user clicks on the ± button when there is no currentOperand or previousOperand
         if (!state.currentOperand && !state.previousOperand) {
           return {
-        ...state,
-        currentOperand: "0",
-        previousOperand: null,
-        operation: null,
+            ...state,
+            currentOperand: "0",
+            previousOperand: null,
+            operation: null,
           };
         }
 
-        // If currentOperand is null, negate previousOperand if it exists
-        // in the other word, if we have a previousOperand
-        // and we click on the ± button, it will negate the previousOperand
+        // If currentOperand is null, and previousOperand exists, then we will negate the previousOperand
+        // for example, suppose we want to do 5 + 3 but we changed our mind
+        // and we want to negate the 5 after we clicked +, it is supposed to be -5+3
+        // what will happen is as 5 is now the previousOperand and currentOperand is null when we click + button,
+        // then we will negate the previousOperand
+        // and set the operation to null, so that the next digit input will start a new calculation
+
         if (!state.currentOperand && state.previousOperand) {
           // Toggle sign, handle double negatives
+
           let negated = MathEvaluation({
-        currentOperand: state.previousOperand,
-        previousOperand: "0",
-        operation: payload.operation,
+            currentOperand: state.previousOperand,
+            previousOperand: "0",
+            operation: payload.operation,
           });
           return {
-        ...state,
-        previousOperand: negated,
-        operation: null,
-        override: true,
+            ...state,
+
+            previousOperand: negated,
+            operation: null,
+            override: true,
           };
         }
 
         // If currentOperand exists, negate it (handle double negatives)
+        // in the other word, if we have a currentOperand
+        // and we click on the ± button, it will negate the currentOperand
+        // and set the override to true to allow next digit input
+        // This is to ensure that the next digit input by the user will start a new calculation
+        // and not append to the negated currentOperand
+        // This is useful when the user clicks on the ± button
+        // when there is a currentOperand
+        // and we want to negate it
         if (state.currentOperand) {
           let negated = MathEvaluation({
-        currentOperand: state.currentOperand,
-        previousOperand: "0",
-        operation: payload.operation,
+            currentOperand: state.currentOperand,
+            previousOperand: "0",
+            operation: payload.operation,
           });
           return {
-        ...state,
-        currentOperand: negated,
-        override: true,
+            ...state,
+            currentOperand: negated,
+            override: true,
           };
         }
 
         // Default fallback
         return state;
       }
-
-
-
-
-
-
 
       if (state.currentOperand == null && state.previousOperand == null) {
         return state; // Ignore if both operands are null
@@ -153,10 +187,6 @@ export default function reducer(state, { type, payload }) {
         operation: payload.operation,
       };
 
-
-
-
-
     case ACTIONS.CLEAR:
       return {};
 
@@ -168,8 +198,6 @@ export default function reducer(state, { type, payload }) {
       ) {
         return state; // Ignore evaluation if any operand or operation is missing
       }
-
-     
 
       return {
         ...state,
